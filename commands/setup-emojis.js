@@ -17,9 +17,9 @@ const EMOJI_LIST = [
     {
         service: 'Disney', name: 'rev_disney',
         urls: [
-            'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/500px-Disney%2B_logo.svg.png',
             'https://cdn.freebiesupply.com/logos/large/2x/disney-plus-logo-png-transparent.png',
             'https://download.logo.wine/logo/Disney%2B/Disney%2B-Logo.wine.png',
+            'https://img.icons8.com/color/96/disney.png',
         ],
     },
     {
@@ -78,7 +78,7 @@ const EMOJI_LIST = [
     {
         service: 'Paramount', name: 'rev_paramount',
         urls: [
-            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png',
+            'https://www.edigitalagency.com.au/wp-content/uploads/Paramount-plus-logo-blue-PNG.png',
             'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/1280px-Paramount_Plus.svg.png',
             'https://img.icons8.com/color/96/paramount-plus.png',
         ],
@@ -126,8 +126,8 @@ const EMOJI_LIST = [
     // Roblox service + utility/currency emoji
     { service: 'Roblox',      name: 'rev_roblox',      urls: ['https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png',                               'https://assets.stickpng.com/images/6294eb0b4609037792ef36f2.png',                'https://img.icons8.com/color/96/roblox.png'] },
     { service: '_bitcoin',    name: 'rev_bitcoin',     urls: ['https://logos-world.net/wp-content/uploads/2020/08/Bitcoin-Logo.png',                                     'https://cdn.freebiesupply.com/logos/large/2x/bitcoin-logo-png-transparent.png',   'https://img.icons8.com/color/96/bitcoin.png'] },
-    { service: '_litecoin',   name: 'rev_litecoin',    urls: ['https://cdn.freebiesupply.com/logos/large/2x/litecoin-logo-png-transparent.png',                          'https://upload.wikimedia.org/wikipedia/commons/2/24/6_Full_Logo_S-2.png',         'https://img.icons8.com/color/96/litecoin.png'] },
-    { service: '_solana',     name: 'rev_solana',      urls: ['https://images.seeklogo.com/logo-png/42/1/solana-sol-logo-png_seeklogo-423095.png',                       'https://img.icons8.com/color/96/solana.png'] },
+    { service: '_litecoin',   name: 'rev_litecoin',    urls: ['https://cryptologos.cc/logos/litecoin-ltc-logo.png',                                                     'https://assets.coingecko.com/coins/images/2/large/litecoin.png',                  'https://img.icons8.com/color/96/litecoin.png'] },
+    { service: '_solana',     name: 'rev_solana',      urls: ['https://cryptologos.cc/logos/solana-sol-logo.png',                                                         'https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png',                   'https://img.icons8.com/color/96/solana.png'] },
     { service: '_paypal',     name: 'rev_paypal',      urls: ['https://cdn.freebiesupply.com/logos/large/2x/paypal-icon-logo-png-transparent.png',                       'https://assets.stickpng.com/images/580b57fcd9996e24bc43c530.png',                 'https://img.icons8.com/color/96/paypal.png'] },
     { service: '_visa',       name: 'rev_visa',        urls: ['https://upload.wikimedia.org/wikipedia/commons/d/d3/Visa_Inc._logo_%282005%E2%80%932014%29.png',           'https://cdn.freebiesupply.com/logos/large/2x/visa-2-logo-png-transparent.png',    'https://img.icons8.com/color/96/visa.png'] },
     { service: '_giftcard',   name: 'rev_giftcard',    urls: ['https://img.icons8.com/color/96/gift-card.png',           'https://img.icons8.com/fluency/96/gift-card.png'] },
@@ -171,8 +171,10 @@ module.exports = {
         const guild   = interaction.guild;
         const results = [];
 
+        // Always fetch fresh from Discord so deleted emoji don't show as "existing"
+        await guild.emojis.fetch();
+
         for (const item of EMOJI_LIST) {
-            // Reuse existing emoji if already uploaded
             const existing = guild.emojis.cache.find(e => e.name === item.name);
             if (existing) {
                 db.setGenEmoji(item.service, existing.toString());
