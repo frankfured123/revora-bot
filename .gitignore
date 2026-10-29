@@ -1,0 +1,5 @@
+.env
+node_modules/
+revora-data.json
+*.db
+.DS_Store
