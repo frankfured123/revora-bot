@@ -17,28 +17,22 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(0xFF0000)
-            .setAuthor({
-                name: 'Revora.xyz — Support',
-                iconURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Roblox_Logo_2022.svg/512px-Roblox_Logo_2022.svg.png',
-            })
-            .setTitle('👑 Open a Support Ticket')
+            .setTitle('🎫 Revora Support')
             .setDescription([
-                '> Need help? Our support team is here for you 24/7.',
-                '> Click **Open Ticket** below to create a private support channel.',
+                'Need help? Our support team is here for you.',
                 '',
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━',
+                'Click **Open Ticket** below to create a private support ticket.',
+                'Please have the following ready:',
                 '',
-                '**Have the following ready:**',
-                '> • A clear description of your issue',
-                '> • Which product you purchased',
-                '> • Any screenshots or error messages',
+                '• A clear description of your issue',
+                '• Which product you purchased',
+                '• Any relevant screenshots or error messages',
             ].join('\n'))
             .addFields(
-                { name: '⏱️ Response Time',    value: 'Typically within a few hours',                                    inline: true  },
-                { name: '🛍️ Products Covered', value: 'CS2 · Roblox · Minecraft · Bloodstrike · Combat Master · OGU', inline: false },
+                { name: '⏱️ Response Time', value: 'Typically within a few hours', inline: true },
+                { name: '🛍️ Products Supported', value: 'CS2 · Roblox · Minecraft · Bloodstrike · Combat Master', inline: false },
             )
-            .setFooter({ text: 'Revora.xyz • Support' })
-            .setTimestamp();
+            .setFooter({ text: 'Revora Support • 2026' });
 
         const btn = new ButtonBuilder()
             .setCustomId('create_ticket_button')
