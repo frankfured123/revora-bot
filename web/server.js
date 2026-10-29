@@ -59,7 +59,7 @@ async function assignVerifiedRoles(userId) {
     const member = await guild.members.fetch(userId).catch(() => null);
     if (!member) return;
 
-    const memberRole     = guild.roles.cache.find(r => r.name === 'Member');
+    const memberRole     = guild.roles.cache.find(r => r.name === 'Revora Member');
     const unverifiedRole = guild.roles.cache.find(r => r.name === 'Unverified');
     if (memberRole)     await member.roles.add(memberRole).catch(console.error);
     if (unverifiedRole) await member.roles.remove(unverifiedRole).catch(console.error);

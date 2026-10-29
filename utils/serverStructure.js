@@ -6,7 +6,7 @@ const ROLES = [
     { name: 'Support',    color: 0xFF4500, hoist: true,  mentionable: false, position: 6 },
     { name: 'Customer',   color: 0xFF6666, hoist: true,  mentionable: true,  position: 5 },
     { name: 'Booster',    color: 0xFF1493, hoist: false, mentionable: false, position: 4 },
-    { name: 'Member',     color: 0x8B0000, hoist: false, mentionable: false, position: 3 },
+    { name: 'Revora Member', color: 0x8B0000, hoist: false, mentionable: false, position: 3 },
     { name: 'Unverified', color: 0x1C1C1C, hoist: false, mentionable: false, position: 2 },
 ];
 
@@ -79,7 +79,7 @@ function supportTeamPerms(guild) {
 
 // Returns the full category + channel tree
 function getStructure(guild) {
-    const membersAndAbove = ['Member', 'Customer', 'Booster', 'Support', 'Admin', 'Owner'];
+    const membersAndAbove = ['Revora Member', 'Customer', 'Booster', 'Support', 'Admin', 'Owner'];
     const supportAndAbove = ['Support', 'Admin', 'Owner'];
     const adminAndAbove   = ['Admin', 'Owner'];
 

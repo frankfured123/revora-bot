@@ -53,7 +53,7 @@ module.exports = {
 
             // Fetch fresh roles so cache is never stale
             await guild.roles.fetch();
-            const memberRole = guild.roles.cache.find(r => r.name === 'Member');
+            const memberRole = guild.roles.cache.find(r => r.name === 'Revora Member');
             const unverified = guild.roles.cache.find(r => r.name === 'Unverified');
 
             if (!memberRole) {
