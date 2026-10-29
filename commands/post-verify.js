@@ -17,20 +17,21 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(0xFF0000)
-            .setTitle('🔐 Verify Your Account')
+            .setAuthor({ name: 'Revora.xyz — Verification' })
+            .setTitle('👑 Welcome to Revora')
             .setDescription([
-                'To gain full access to **Revora**, you must verify your Discord account.',
+                '> To gain **full access** to the server, verify your Discord account below.',
+                '> This only takes a few seconds.',
                 '',
-                '**Click the button below** to begin the verification process.',
+                '━━━━━━━━━━━━━━━━━━━━━━━━━━',
                 '',
-                '> By verifying, you authorise Revora to confirm your Discord identity',
-                '> and automatically grant you Member access.',
+                '**What verification gives you:**',
+                '> ✅ Confirms your Discord account is real',
+                '> 🎭 Grants you the **Member** role',
+                '> 🔓 Unlocks all member-only channels',
             ].join('\n'))
-            .addFields({
-                name: '✅ What verification does',
-                value: '• Confirms your Discord account is real\n• Gives you the **Member** role\n• Unlocks all member channels',
-            })
-            .setFooter({ text: 'Revora • This only takes a few seconds' });
+            .setFooter({ text: 'Revora.xyz • One click and you\'re in' })
+            .setTimestamp();
 
         const btn = new ButtonBuilder()
             .setCustomId('verify_button')
