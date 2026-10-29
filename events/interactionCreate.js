@@ -48,18 +48,25 @@ module.exports = {
 
         // ── Button: Verify ─────────────────────────────────────────────────
         if (interaction.isButton() && interaction.customId === 'verify_button') {
-            const guild        = interaction.guild;
-            const member       = interaction.member;
-            const memberRole   = guild.roles.cache.find(r => r.name === 'Member');
-            const unverified   = guild.roles.cache.find(r => r.name === 'Unverified');
+            const guild  = interaction.guild;
+            const member = await guild.members.fetch(interaction.user.id);
 
-            if (member.roles.cache.has(memberRole?.id)) {
+            // Fetch fresh roles so cache is never stale
+            await guild.roles.fetch();
+            const memberRole = guild.roles.cache.find(r => r.name === 'Member');
+            const unverified = guild.roles.cache.find(r => r.name === 'Unverified');
+
+            if (!memberRole) {
+                return interaction.reply({ content: '❌ Member role not found — ask an admin to run `/setup` first.', ephemeral: true });
+            }
+
+            if (member.roles.cache.has(memberRole.id)) {
                 return interaction.reply({ content: '✅ You are already verified!', ephemeral: true });
             }
 
             try {
-                if (memberRole)  await member.roles.add(memberRole);
-                if (unverified)  await member.roles.remove(unverified);
+                await member.roles.add(memberRole);
+                if (unverified) await member.roles.remove(unverified);
 
                 await interaction.reply({
                     content: '✅ **You have been verified!** Welcome to Revora — you now have full member access.',

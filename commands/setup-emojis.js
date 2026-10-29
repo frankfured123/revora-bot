@@ -171,15 +171,15 @@ module.exports = {
         const guild   = interaction.guild;
         const results = [];
 
-        // Always fetch fresh from Discord so deleted emoji don't show as "existing"
+        // Always fetch fresh from Discord so cache is never stale
         await guild.emojis.fetch();
 
         for (const item of EMOJI_LIST) {
-            const existing = guild.emojis.cache.find(e => e.name === item.name);
-            if (existing) {
-                db.setGenEmoji(item.service, existing.toString());
-                results.push(`✅ \`${item.name}\` already exists ${existing}`);
-                continue;
+            // Delete ALL existing emoji with this name (handles duplicates)
+            const dupes = guild.emojis.cache.filter(e => e.name === item.name);
+            for (const [, e] of dupes) {
+                await e.delete('Revora emoji refresh').catch(() => {});
+                await sleep(500);
             }
 
             const buffer = await fetchBuffer(item.urls);
